@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Finálny Rozstrel: Dizajn Trička</title>
+    <title>rozstrel</title>
     <style>
       body {
         font-family: 'Arial', sans-serif;
@@ -39,7 +39,8 @@
         transition: transform 0.3s ease-in-out;
       }
 
-      .img-container div:hover {
+      .img-container div:hover,
+      .img-container div:focus {
         transform: scale(1.05);
         cursor: pointer;
       }
@@ -84,62 +85,102 @@
       }
     </style>
   </head>
+
   <body>
     <h1>Finálny Rozstrel</h1>
-    <h2 id="countdown" style="font-size: 18px; margin: 20px 0;"></h2>
+    <h2 id="countdown" style="font-size: 18px; margin: 20px 0"></h2>
     <hr />
     <div class="img-container">
-      <div>
+      <div onclick="imageClicked(1)">
         <p>možnosť 1</p>
         <img src="1.png" alt="Design 1" />
       </div>
-      <div>
+      <div onclick="imageClicked(2)">
         <p>možnosť 2</p>
         <img src="2.png" alt="Design 2" />
       </div>
     </div>
     <hr />
-    <iframe
-      src="https://docs.google.com/forms/d/e/1FAIpQLSdO3PdgnRWVdp_cj-lXCTHUi1KSkdeThPhtM7Bg-FGZVhFrrQ/viewform?embedded=true"
-      frameborder="0"
-      marginheight="0"
-      marginwidth="0"
-      style="
-        width: 100%;
-        min-height: 500px;
-        border-radius: 15px;
-        box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
-      "
-      >Načítava sa…</iframe
-    >
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScvc9JrPMtw2kTSAwEqjrQdWikISXZRXpVLDjpELpriANv2Mw/viewform?embedded=true" id="formIframe" frameborder="0"
+    marginheight="0"
+    marginwidth="0"
+    style="
+      width: 100%;
+      min-height: 500px;
+      border-radius: 15px;
+      box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+    "
+    >Načítava sa…</iframe>
   </body>
+
   <script>
     // Set the date we're counting down to
-    var countDownDate = new Date("Dec 4, 2023 15:00:00").getTime();
+    var countDownDate = new Date('Dec 4, 2023 15:00:00').getTime();
 
     // Update the count down every 1 second
-    var x = setInterval(function() {
+    var x = setInterval(function () {
+      // Get today's date and time
+      var now = new Date().getTime();
 
-        // Get today's date and time
-        var now = new Date().getTime();
+      // Find the distance between now and the count down date
+      var distance = countDownDate - now;
 
-        // Find the distance between now and the count down date
-        var distance = countDownDate - now;
+      // Time calculations for days, hours, minutes and seconds
+      var hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Time calculations for days, hours, minutes and seconds
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      // Display the result in the element with id="countdown"
+      document.getElementById('countdown').innerHTML =
+        'koniec o ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
 
-        // Display the result in the element with id="countdown"
-        document.getElementById("countdown").innerHTML = "koniec o " + hours + "h "
-        + minutes + "m " + seconds + "s ";
-
-        // If the count down is finished, write some text
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("countdown").innerHTML = "EXPIRED";
-        }
+      // If the count down is finished, write some text
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById('countdown').innerHTML = 'EXPIRED';
+      }
     }, 1000);
-</script>
+
+    function imageClicked(imageNumber) {
+      // Apply scaling effect
+      var images = document.querySelectorAll('.img-container div');
+      images.forEach((div) => {
+        div.style.transform = 'scale(1)'; // Reset other images
+      });
+      images[imageNumber - 1].style.transform = 'scale(1.05)'; // Scale clicked image
+
+      // Scroll to the iframe
+      var iframe = document.getElementById('formIframe');
+      iframe.scrollIntoView({behavior: 'smooth', block: 'start'});
+
+      // Optional: focus on the iframe for accessibility
+      iframe.focus();
+    }
+
+    function trackVisits() {
+        let visitCount = localStorage.getItem('visitCount');
+        let lastVisitTime = localStorage.getItem('lastVisitTime');
+        const currentTime = new Date().getTime();
+        const oneHour = 3600000; // Milliseconds in one hour
+
+        if (lastVisitTime && (currentTime - lastVisitTime) < oneHour) {
+            visitCount = visitCount ? parseInt(visitCount) : 0;
+
+            if (visitCount >= 100) {
+                window.location.href = '/limit.html';
+                return;
+            } else {
+                localStorage.setItem('visitCount', visitCount + 1);
+            }
+        } else {
+            // Reset count after an hour
+            localStorage.setItem('visitCount', 1);
+            localStorage.setItem('lastVisitTime', currentTime);
+        }
+    }
+
+    trackVisits();
+  </script>
 </html>
