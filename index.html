@@ -168,7 +168,7 @@
         if (lastVisitTime && (currentTime - lastVisitTime) < oneHour) {
             visitCount = visitCount ? parseInt(visitCount) : 0;
 
-            if (visitCount >= 100) {
+            if (visitCount >= 3) {
                 window.location.href = '/limit.html';
                 return;
             } else {
