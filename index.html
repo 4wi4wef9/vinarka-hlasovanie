@@ -169,7 +169,7 @@
             visitCount = visitCount ? parseInt(visitCount) : 0;
 
             if (visitCount >= 3) {
-                window.location.href = '/limit.html';
+                window.location.href = '/limit';
                 return;
             } else {
                 localStorage.setItem('visitCount', visitCount + 1);
