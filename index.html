@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>rozstrel</title>
+    <title>výsledok</title>
     <style>
       body {
         font-family: 'Arial', sans-serif;
@@ -19,40 +19,33 @@
         font-size: 2em;
         text-transform: uppercase;
         letter-spacing: 2px;
+        margin-bottom: 30px;
       }
 
-      h2 {
+      .winner-announcement {
+        font-size: 20px;
         font-weight: 600;
-        font-size: 28px;
-      }
-
-      .img-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
         margin-bottom: 20px;
+        color: #4caf50; /* Green to signify the winner */
       }
 
-      .img-container div {
-        text-align: center;
-        transition: transform 0.3s ease-in-out;
-      }
-
-      .img-container div:hover,
-      .img-container div:focus {
-        transform: scale(1.05);
-        cursor: pointer;
-      }
-
-      img {
-        width: 90%;
+      .winner-image {
         max-width: 300px;
-        height: auto;
-        border: 3px solid #ddd;
+        border: 3px solid #4caf50; /* Consistent with the voting page style */
         border-radius: 10px;
         padding: 10px;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .details {
+        font-size: 18px;
+        margin-top: 20px;
+        color: #323232;
+      }
+
+      hr {
+        margin-top: 20px;
+        margin-bottom: 20px;
       }
 
       p {
@@ -61,127 +54,146 @@
         font-weight: bold;
         color: #323232;
       }
-
-      iframe {
-        border: none;
-        width: 100%;
-        max-width: 640px;
-        min-height: 500px;
-        margin: auto;
-        display: block;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-      }
-
-      hr {
-        margin-top: 20px;
-        margin-bottom: 20px;
-      }
-
-      @media (min-width: 600px) {
-        .img-container {
-          flex-direction: row;
-          justify-content: center;
-        }
-      }
     </style>
   </head>
-
   <body>
-    <h1>Finálny Rozstrel</h1>
-    <h2 id="countdown" style="font-size: 18px; margin: 20px 0"></h2>
+    <h1>Výsledky Hlasovania</h1>
     <hr />
-    <div class="img-container">
-      <div onclick="imageClicked(1)">
-        <p>možnosť 1</p>
-        <img src="4.JPG" alt="Design 1" />
-        <img src="5.JPG" alt="Design 1" />
-      </div>
-      <div onclick="imageClicked(2)">
-        <p>možnosť 2</p>
-        <img src="2.png" alt="Design 2" />
-      </div>
+    <p class="winner-announcement">víťazný dizajn 🏆</p>
+    <p>možnosť 1</p>
+    <img src="4.JPG" alt="víťazný dizajn" class="winner-image" />
+    <img src="5.JPG" alt="víťazný dizajn" class="winner-image" />
+    <div class="details">
+      <hr />
+      <p style="font-size: 17px; font-weight: bold">
+        ďakujeme všetkým, ktorí sa zúčastnili hlasovania
+      </p>
+
+      <svg
+        width="100%"
+        viewBox="0 0 732 200"
+        aria-label="Graf."
+        style="overflow: hidden">
+        <defs id="_ABSTRACT_RENDERER_ID_17"></defs>
+        <rect
+          x="0"
+          y="0"
+          width="732"
+          height="200"
+          stroke="none"
+          stroke-width="0"
+          fill="#ffffff"></rect>
+        <g>
+          <rect
+            x="463"
+            y="10"
+            width="233"
+            height="31"
+            stroke="none"
+            stroke-width="0"
+            fill-opacity="0"
+            fill="#ffffff"></rect>
+          <g column-id="možnosť 1">
+            <rect
+              x="463"
+              y="10"
+              width="233"
+              height="12"
+              stroke="none"
+              stroke-width="0"
+              fill-opacity="0"
+              fill="#ffffff"></rect>
+            <g>
+              <text
+                text-anchor="start"
+                x="480"
+                y="20.2"
+                font-family="Arial"
+                font-size="12"
+                stroke="none"
+                stroke-width="0"
+                fill="#222222">
+                možnosť 1
+              </text>
+            </g>
+            <circle
+              cx="469"
+              cy="16"
+              r="6"
+              stroke="none"
+              stroke-width="0"
+              fill="#3366cc"></circle>
+          </g>
+          <g column-id="možnosť 2">
+            <rect
+              x="463"
+              y="29"
+              width="233"
+              height="12"
+              stroke="none"
+              stroke-width="0"
+              fill-opacity="0"
+              fill="#ffffff"></rect>
+            <g>
+              <text
+                text-anchor="start"
+                x="480"
+                y="39.2"
+                font-family="Arial"
+                font-size="12"
+                stroke="none"
+                stroke-width="0"
+                fill="#222222">
+                možnosť 2
+              </text>
+            </g>
+            <circle
+              cx="469"
+              cy="35"
+              r="6"
+              stroke="none"
+              stroke-width="0"
+              fill="#dc3912"></circle>
+          </g>
+        </g>
+        <g>
+          <path
+            d="M241,100L263.38208984483697,12.827515498423196A90,90,0,0,1,331,100L241,100A0,0,0,0,0,241,100"
+            stroke="#ffffff"
+            stroke-width="1"
+            fill="#dc3912"></path>
+          <text
+            text-anchor="start"
+            x="280.1995838572042"
+            y="64.48553182770017"
+            font-family="Arial"
+            font-size="12"
+            stroke="none"
+            stroke-width="0"
+            fill="#ffffff">
+            21%
+          </text>
+        </g>
+        <g>
+          <path
+            d="M241,100L331,100A90,90,0,1,1,263.38208984483697,12.82751549842321L241,100A0,0,0,1,0,241,100"
+            stroke="#ffffff"
+            stroke-width="1"
+            fill="#3366cc"></path>
+          <text
+            text-anchor="start"
+            x="177.8004161427958"
+            y="143.91446817229982"
+            font-family="Arial"
+            font-size="12"
+            stroke="none"
+            stroke-width="0"
+            fill="#ffffff">
+            79%
+          </text>
+        </g>
+        <g></g>
+      </svg>
     </div>
-    <hr />
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScvc9JrPMtw2kTSAwEqjrQdWikISXZRXpVLDjpELpriANv2Mw/viewform?embedded=true" id="formIframe" frameborder="0"
-    marginheight="0"
-    marginwidth="0"
-    style="
-      width: 100%;
-      min-height: 500px;
-      border-radius: 15px;
-      box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
-    "
-    >Načítava sa…</iframe>
   </body>
-
-  <script>
-    // Set the date we're counting down to
-    var countDownDate = new Date('Dec 5, 2023 12:00:00').getTime();
-
-    // Update the count down every 1 second
-    var x = setInterval(function () {
-      // Get today's date and time
-      var now = new Date().getTime();
-
-      // Find the distance between now and the count down date
-      var distance = countDownDate - now;
-
-      // Time calculations for days, hours, minutes and seconds
-      var hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      // Display the result in the element with id="countdown"
-      document.getElementById('countdown').innerHTML =
-        'koniec o ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
-
-      // If the count down is finished, write some text
-      if (distance < 0) {
-        clearInterval(x);
-        document.getElementById('countdown').innerHTML = 'EXPIRED';
-      }
-    }, 1000);
-
-    function imageClicked(imageNumber) {
-      // Apply scaling effect
-      var images = document.querySelectorAll('.img-container div');
-      images.forEach((div) => {
-        div.style.transform = 'scale(1)'; // Reset other images
-      });
-      images[imageNumber - 1].style.transform = 'scale(1.05)'; // Scale clicked image
-
-      // Scroll to the iframe
-      var iframe = document.getElementById('formIframe');
-      iframe.scrollIntoView({behavior: 'smooth', block: 'start'});
-
-      // Optional: focus on the iframe for accessibility
-      iframe.focus();
-    }
-
-    function trackVisits() {
-        let visitCount = localStorage.getItem('visitCount');
-        let lastVisitTime = localStorage.getItem('lastVisitTime');
-        const currentTime = new Date().getTime();
-        const oneHour = 3600000; // Milliseconds in one hour
-
-        if (lastVisitTime && (currentTime - lastVisitTime) < oneHour) {
-            visitCount = visitCount ? parseInt(visitCount) : 0;
-
-            if (visitCount >= 3) {
-                window.location.href = 'limit';
-                return;
-            } else {
-                localStorage.setItem('visitCount', visitCount + 1);
-            }
-        } else {
-            // Reset count after an hour
-            localStorage.setItem('visitCount', 1);
-            localStorage.setItem('lastVisitTime', currentTime);
-        }
-    }
-
-    trackVisits();
-  </script>
 </html>

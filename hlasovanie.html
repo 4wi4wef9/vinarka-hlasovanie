@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="sk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rozstrel</title>
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        text-align: center;
+        background-color: #e6e6e6;
+        margin: 0;
+        padding: 20px;
+        color: #101010;
+      }
+
+      h1 {
+        color: #1a1a1a;
+        font-size: 2em;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      h2 {
+        font-weight: 600;
+        font-size: 28px;
+      }
+
+      .img-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .img-container div {
+        text-align: center;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .img-container div:hover,
+      .img-container div:focus {
+        transform: scale(1.05);
+        cursor: pointer;
+      }
+
+      img {
+        width: 90%;
+        max-width: 300px;
+        height: auto;
+        border: 3px solid #ddd;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      p {
+        margin: 5px 0;
+        font-size: 18px;
+        font-weight: bold;
+        color: #323232;
+      }
+
+      iframe {
+        border: none;
+        width: 100%;
+        max-width: 640px;
+        min-height: 500px;
+        margin: auto;
+        display: block;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      hr {
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      @media (min-width: 600px) {
+        .img-container {
+          flex-direction: row;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Finálny Rozstrel</h1>
+    <h2 id="countdown" style="font-size: 18px; margin: 20px 0"></h2>
+    <hr />
+    <div class="img-container">
+      <div onclick="imageClicked(1)">
+        <p>možnosť 1</p>
+        <img src="4.JPG" alt="Design 1" />
+        <img src="5.JPG" alt="Design 1" />
+      </div>
+      <div onclick="imageClicked(2)">
+        <p>možnosť 2</p>
+        <img src="2.png" alt="Design 2" />
+      </div>
+    </div>
+    <hr />
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScvc9JrPMtw2kTSAwEqjrQdWikISXZRXpVLDjpELpriANv2Mw/viewform?embedded=true" id="formIframe" frameborder="0"
+    marginheight="0"
+    marginwidth="0"
+    style="
+      width: 100%;
+      min-height: 500px;
+      border-radius: 15px;
+      box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+    "
+    >Načítava sa…</iframe>
+  </body>
+
+  <script>
+    // Set the date we're counting down to
+    var countDownDate = new Date('Dec 5, 2023 12:00:00').getTime();
+
+    // Update the count down every 1 second
+    var x = setInterval(function () {
+      // Get today's date and time
+      var now = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      var distance = countDownDate - now;
+
+      // Time calculations for days, hours, minutes and seconds
+      var hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Display the result in the element with id="countdown"
+      document.getElementById('countdown').innerHTML =
+        'koniec o ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
+
+      // If the count down is finished, write some text
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById('countdown').innerHTML = 'EXPIRED';
+      }
+    }, 1000);
+
+    function imageClicked(imageNumber) {
+      // Apply scaling effect
+      var images = document.querySelectorAll('.img-container div');
+      images.forEach((div) => {
+        div.style.transform = 'scale(1)'; // Reset other images
+      });
+      images[imageNumber - 1].style.transform = 'scale(1.05)'; // Scale clicked image
+
+      // Scroll to the iframe
+      var iframe = document.getElementById('formIframe');
+      iframe.scrollIntoView({behavior: 'smooth', block: 'start'});
+
+      // Optional: focus on the iframe for accessibility
+      iframe.focus();
+    }
+
+    function trackVisits() {
+        let visitCount = localStorage.getItem('visitCount');
+        let lastVisitTime = localStorage.getItem('lastVisitTime');
+        const currentTime = new Date().getTime();
+        const oneHour = 3600000; // Milliseconds in one hour
+
+        if (lastVisitTime && (currentTime - lastVisitTime) < oneHour) {
+            visitCount = visitCount ? parseInt(visitCount) : 0;
+
+            if (visitCount >= 3) {
+                window.location.href = 'limit';
+                return;
+            } else {
+                localStorage.setItem('visitCount', visitCount + 1);
+            }
+        } else {
+            // Reset count after an hour
+            localStorage.setItem('visitCount', 1);
+            localStorage.setItem('lastVisitTime', currentTime);
+        }
+    }
+
+    trackVisits();
+  </script>
+</html>
